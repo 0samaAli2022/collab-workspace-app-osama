@@ -7,3 +7,5 @@
 | Task Assignment        | Assign tasks to users in the same workspace                            |
 | Bonus: Notification    | Simulate notification when a task is moved to "Done"                   |
 | Offline Support        | Enable local caching using Firestore offline mode                      |
+
+![alt text](image.png)
