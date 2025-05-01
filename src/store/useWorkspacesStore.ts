@@ -1,7 +1,7 @@
 // src/store/useWorkspacesStore.ts
 import {create} from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 // Define workspace types for TypeScript
@@ -10,6 +10,8 @@ type Workspace = {
   name: string;
   description: string;
   members: string[];
+  createdAt: Date;
+  createdBy: string;
 };
 
 type WorkspaceStore = {
@@ -17,6 +19,7 @@ type WorkspaceStore = {
   isLoading: boolean;
   error: string | null;
   fetchWorkspaces: () => Promise<void>;
+  createWorkspace: (name: string, description: string, userId: string) => Promise<void>;
   setWorkspaces: (workspaces: Workspace[]) => void;
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
@@ -47,6 +50,8 @@ export const useWorkspacesStore = create<WorkspaceStore>()(
               name: data.name || "",
               description: data.description || "",
               members: data.members || [],
+              createdAt: data.createdAt ? data.createdAt.toDate() : new Date(),
+              createdBy: data.createdBy || "",
             };
           });
           
@@ -55,6 +60,34 @@ export const useWorkspacesStore = create<WorkspaceStore>()(
           set({ error: error.message });
         } finally {
           set({ isLoading: false });
+        }
+      },
+      createWorkspace: async (name, description, userId) => {
+        try {
+          const docRef = await addDoc(collection(db, "workspaces"), {
+            name,
+            description,
+            members: [userId],
+            createdAt: new Date(),
+            createdBy: userId,
+          });
+    
+          // Update local state
+          set((state) => ({
+            workspaces: [
+              ...state.workspaces,
+              {
+                id: docRef.id,
+                name,
+                description,
+                members: [userId],
+                createdAt: new Date(),
+                createdBy: userId,
+              },
+            ],
+          }));
+        } catch (error: any) {
+          set({ error: error.message });
         }
       },
       setWorkspaces: (workspaces) => set({ workspaces }),

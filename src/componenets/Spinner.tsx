@@ -7,13 +7,13 @@ interface SpinnerProps {
 
 const override = {
   display: "block",
-  margin: "300px auto",
+  margin: "180px auto",
 };
 
 const Spinner: React.FC<SpinnerProps> = ({ loading }) => {
   return (
     <ClipLoader
-      color="#000000"
+      color="#ffffff"
       loading={loading}
       cssOverride={override}
       size={100}
