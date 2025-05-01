@@ -1,10 +1,7 @@
-// src/store/useWorkspacesStore.ts
 import {create} from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-// Define workspace types for TypeScript
 type Workspace = {
   id: string;
   name: string;
@@ -25,8 +22,7 @@ type WorkspaceStore = {
   setError: (error: string | null) => void;
 };
 
-export const useWorkspacesStore = create<WorkspaceStore>()(
-  persist(
+export const useWorkspacesStore = create<WorkspaceStore>(
     (set, get) => ({
       workspaces: [],
       isLoading: false,
@@ -93,10 +89,5 @@ export const useWorkspacesStore = create<WorkspaceStore>()(
       setWorkspaces: (workspaces) => set({ workspaces }),
       setLoading: (isLoading) => set({ isLoading }),
       setError: (error) => set({ error }),
-    }),
-    {
-      name: "workspaces-storage", // Name of the persisted storage key
-      storage: createJSONStorage(() => localStorage), // Use localStorage for persistence
-    }
-  )
+    })
 );
