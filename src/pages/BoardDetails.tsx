@@ -1,4 +1,3 @@
-// pages/BoardDetails.tsx
 const columns = {
     "To Do": [
       { id: "1", title: "Set up Firebase", assignedTo: "Ali" },

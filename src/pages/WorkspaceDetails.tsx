@@ -1,4 +1,3 @@
-// pages/WorkspaceDetails.tsx
 import { Link, useParams } from "react-router-dom";
 
 const boards = [

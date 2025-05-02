@@ -22,8 +22,10 @@ const WorkspaceDashboard = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    fetchWorkspaces();
-  }, [fetchWorkspaces]);
+    if (user?.uid) {
+      fetchWorkspaces(user.uid);
+    }
+  }, [user]);
 
   const handleLogout = () => {
     logout();
@@ -54,9 +56,8 @@ const WorkspaceDashboard = () => {
                 {({ active }) => (
                   <button
                     onClick={handleLogout}
-                    className={`w-full text-left px-4 py-2 ${
-                      active ? "bg-gray-100 dark:bg-gray-700" : ""
-                    }`}
+                    className={`w-full text-left px-4 py-2 ${active ? "bg-gray-100 dark:bg-gray-700" : ""
+                      }`}
                   >
                     Log Out
                   </button>
@@ -67,7 +68,17 @@ const WorkspaceDashboard = () => {
         </div>
       </header>
 
-        <h2 className="text-2xl font-bold p-8">Your Workspaces</h2>
+      <div className="flex justify-between items-center p-8">
+        <h2 className="text-2xl font-bold">Your Workspaces</h2>
+        <button
+          onClick={handleCreateWorkspace}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition"
+        >
+          <PlusCircleIcon className="w-5 h-5" />
+          Create Workspace
+        </button>
+      </div>
+
       {/* Main Content */}
       <main className="p-8">
         {isLoading ? (
@@ -79,15 +90,6 @@ const WorkspaceDashboard = () => {
               <EmptyState
                 message="You don’t have any workspaces yet."
                 icon={<PlusCircleIcon className="w-12 h-12 text-indigo-400" />}
-                action={
-                  <button
-                    onClick={handleCreateWorkspace}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition"
-                  >
-                    <PlusCircleIcon className="w-5 h-5" />
-                    Create Workspace
-                  </button>
-                }
               />
             ) : (
               <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -108,7 +110,7 @@ const WorkspaceDashboard = () => {
             )}
           </>
         )}
-      <CreateWorkspaceModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <CreateWorkspaceModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
 import {create} from "zustand";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 type Workspace = {
@@ -15,7 +15,7 @@ type WorkspaceStore = {
   workspaces: Workspace[];
   isLoading: boolean;
   error: string | null;
-  fetchWorkspaces: () => Promise<void>;
+  fetchWorkspaces: (userId: string) => Promise<void>;
   createWorkspace: (name: string, description: string, userId: string) => Promise<void>;
   setWorkspaces: (workspaces: Workspace[]) => void;
   setLoading: (isLoading: boolean) => void;
@@ -23,20 +23,17 @@ type WorkspaceStore = {
 };
 
 export const useWorkspacesStore = create<WorkspaceStore>(
-    (set, get) => ({
+    (set) => ({
       workspaces: [],
       isLoading: false,
       error: null,
-      fetchWorkspaces: async () => {
-        const { workspaces } = get();
-        
-        // Check if workspaces are cached before making the request
-        if (workspaces.length > 0) return;
-
+      fetchWorkspaces: async (userId: string) => {
         set({ isLoading: true });
         try {
           const workspacesCollection = collection(db, "workspaces");
-          const workspaceSnapshot = await getDocs(workspacesCollection);
+          const q = query(workspacesCollection, where("members", "array-contains", userId));
+
+          const workspaceSnapshot = await getDocs(q);
           
           // Map Firebase documents to workspaces
           const workspaceList: Workspace[] = workspaceSnapshot.docs.map((doc) => {
@@ -50,7 +47,7 @@ export const useWorkspacesStore = create<WorkspaceStore>(
               createdBy: data.createdBy || "",
             };
           });
-          
+          console.log("Fetched workspaces:", workspaceList);
           set({ workspaces: workspaceList });
         } catch (error: any) {
           set({ error: error.message });
