@@ -1,7 +1,6 @@
-// src/store/auth.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { auth } from '../config/firebase';
+import { auth, db } from '../config/firebase';
 import {
   signInWithEmailAndPassword,
   signOut,
@@ -10,6 +9,16 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+
+const saveUserProfile = async (user: User) => {
+  await setDoc(doc(db, "users", user.uid), {
+    uid: user.uid,
+    name: user.displayName || "Unnamed User",
+    email: user.email,
+    photoURL: user.photoURL || "https://ui-avatars.com/api/?name=" + encodeURIComponent(user.displayName || "Unnamed User"),
+  });
+};
 
 interface AuthState {
   user: User | null;
@@ -50,6 +59,8 @@ export const useAuthStore = create<AuthState>()(
             });
 
             set({ user, error: null });
+            saveUserProfile(user); // Save user profile to Firestore
+            
           } catch (error: any) {
             set({ error: error.message });
           }

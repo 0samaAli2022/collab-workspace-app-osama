@@ -1,11 +1,10 @@
-// src/store/useBoardsStore.ts
 import {create} from "zustand";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../config/firebase";
 
 type Board = {
   id: string;
-  name: string;
+  title: string;
   workspaceId: string;
 };
 
@@ -13,6 +12,7 @@ type BoardStore = {
   boards: Board[];
   isLoading: boolean;
   error: string | null;
+  createBoard: (workspaceId: string, title: string, userId: string) => Promise<void>;
   fetchBoards: (workspaceId: string) => Promise<void>;
   setBoards: (boards: Board[]) => void;
   setLoading: (isLoading: boolean) => void;
@@ -23,6 +23,24 @@ export const useBoardsStore = create<BoardStore>((set) => ({
   boards: [],
   isLoading: false,
   error: null,
+  createBoard: async (workspaceId, title, userId) => {
+    set({ isLoading: true });
+    try {
+      const boardRef = await addDoc(collection(db, "boards"), {
+        title: title,
+        workspaceId,
+        createdBy: userId,
+        createdAt: new Date(),
+      });
+      set((state) => ({
+        boards: [...state.boards, { id: boardRef.id, title: title, workspaceId }],
+      }));
+    } catch (error) {
+      set({ error: error instanceof Error ? error.message : "An unknown error occurred" });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
   fetchBoards: async (workspaceId) => {
     set({ isLoading: true });
     try {
