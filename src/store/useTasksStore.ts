@@ -87,7 +87,7 @@ export const useTasksStore = create<TaskStore>((set, get) => ({
   moveTask: async (taskId, newStatus) => {
     try {
       const taskRef = doc(db, "tasks", taskId);
-      await updateDoc(taskRef, { status: newStatus });
+      updateDoc(taskRef, { status: newStatus }); // no await here, as we don't need to wait for the update to complete
 
       const updatedTasks = get().tasks.map((task) =>
         task.id === taskId ? { ...task, status: newStatus } : task

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { auth, db } from '../config/firebase';
+
 import {
   signInWithEmailAndPassword,
   signOut,
@@ -77,6 +78,7 @@ export const useAuthStore = create<AuthState>()(
         logout: async () => {
           await signOut(auth);
           set({ user: null, isLoading: false });
+
         },
       };
     },
