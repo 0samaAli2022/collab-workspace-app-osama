@@ -2,8 +2,6 @@
 
 A modern collaborative workspace application built with React and Firebase, designed to help teams organize tasks and projects efficiently through a Kanban-style interface.
 
-![Collab Workspace App](https://via.placeholder.com/800x400?text=Collab+Workspace+App)
-
 ## Features
 
 | Feature                 | Description                                                            |
@@ -37,7 +35,7 @@ A modern collaborative workspace application built with React and Firebase, desi
 
 1. Clone the repository
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/0samaAli2022/collab-workspace-app-osama.git
    cd collab-workspace-app-osama
    ```
 
@@ -89,4 +87,6 @@ yarn build
 ```
 
 The build artifacts will be stored in the `dist/` directory.
+
+For the documentation, refer to the `src/docs/` folder.
 
