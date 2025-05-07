@@ -53,6 +53,8 @@ const TaskModal = ({ isOpen, onClose, editTask }: Props) => {
             } else {
                 // If it's create mode, create a new task
                 await createTask(taskData);
+                console.log(`[Notification] Task '${taskData.title}' has been assigned to user ${taskData.assignedTo}.`);
+
             }
             onClose();
             setTitle("");
