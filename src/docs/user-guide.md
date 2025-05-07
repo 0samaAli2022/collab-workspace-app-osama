@@ -55,7 +55,6 @@ The Workspace Dashboard is your home screen after logging in. Here you can:
 
 1. From the Workspace Dashboard, click the "Create Workspace" button
 2. Enter a name and optional description for your workspace
-3. Add team members by entering their email addresses (optional)
 4. Click "Create"
 
 ### Accessing a Workspace
@@ -65,24 +64,6 @@ From the Workspace Dashboard, click on any workspace card to navigate to that wo
 ## Workspaces
 
 The Workspace Details page shows information about a specific workspace and the boards it contains.
-
-### Workspace Settings
-
-1. From the Workspace Details page, click the "Settings" button
-2. Here you can:
-   - Edit workspace name and description
-   - Manage workspace members
-   - Delete the workspace (if you're the owner)
-
-### Managing Workspace Members
-
-1. From the Workspace Settings, click on "Manage Members"
-2. To add a member:
-   - Enter their email address
-   - Click "Add Member"
-3. To remove a member:
-   - Find the member in the list
-   - Click the "Remove" button next to their name
 
 ## Boards
 
@@ -179,43 +160,3 @@ However, you cannot:
 - Create new workspaces or boards
 - Add new members to workspaces
 - See changes made by other users until you're back online
-
-## Troubleshooting
-
-### Common Issues
-
-#### Can't Log In
-
-- Verify that you're using the correct email and password
-- Check your internet connection
-- Try resetting your password
-
-#### Changes Not Saving
-
-- Check your internet connection
-- Refresh the page and try again
-- If working offline, connect to the internet to sync changes
-
-#### Can't See a Workspace
-
-- Verify that you've been added as a member of the workspace
-- Refresh the page
-- Log out and log back in
-
-### Getting Help
-
-If you encounter issues not covered in this guide, please contact support at support@collabworkspace.com or use the in-app help feature by clicking the "?" icon in the top-right corner.
-
-## Keyboard Shortcuts
-
-For power users, the following keyboard shortcuts are available:
-
-- `N`: Create a new task
-- `W`: Go to Workspace Dashboard
-- `Esc`: Close modal
-- `Ctrl/Cmd + S`: Save changes
-- `Ctrl/Cmd + F`: Search
-
----
-
-Thank you for using the Collab Workspace App! We hope this guide helps you make the most of our collaborative project management tool.

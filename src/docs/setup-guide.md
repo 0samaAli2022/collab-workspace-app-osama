@@ -104,36 +104,7 @@ This guide provides detailed instructions for setting up and running the Collab 
       export { app, auth, db };
       ```
 
-4. **Environment Variables (Optional)**
-
-   For additional configuration or environment-specific settings:
-
-   a. Create a `.env` file in the project root:
-   ```
-   VITE_APP_NAME=Collab Workspace
-   VITE_FIREBASE_API_KEY=your_api_key
-   VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-   VITE_FIREBASE_PROJECT_ID=your_project_id
-   VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-   VITE_FIREBASE_APP_ID=your_app_id
-   VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-   ```
-
-   b. Update `firebase.ts` to use environment variables:
-   ```typescript
-   const firebaseConfig = {
-     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-     appId: import.meta.env.VITE_FIREBASE_APP_ID,
-     measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
-   };
-   ```
-
-5. **Start the Development Server**
+4. **Start the Development Server**
 
    Using npm:
    ```bash
@@ -253,59 +224,6 @@ The application can be deployed to any static hosting service:
      }
      ```
 
-## Troubleshooting
-
-### Common Issues
-
-1. **Node.js Version Compatibility**
-   - Error: "The engine "node" is incompatible with this module"
-   - Solution: Update Node.js to version 18 or higher
-
-2. **Firebase Authentication Issues**
-   - Error: "Firebase: Error (auth/...)"
-   - Solution: Check Firebase Console > Authentication > Sign-in methods
-
-3. **Firestore Permissions**
-   - Error: "Missing or insufficient permissions"
-   - Solution: Review and update Firestore security rules
-
-4. **Build Errors**
-   - Error: TypeScript compilation errors
-   - Solution: Fix type errors in the codebase
-
-### Getting Help
-
-If you encounter issues not covered in this guide:
-
-1. Check the [Firebase documentation](https://firebase.google.com/docs)
-2. Search for solutions on [Stack Overflow](https://stackoverflow.com/)
-3. Open an issue in the project repository
-
-## Development Workflow
-
-### Code Style and Linting
-
-The project uses ESLint for code linting:
-
-```bash
-# Run linting
-npm run lint
-# or
-yarn lint
-```
-
-### Testing the Production Build Locally
-
-To preview the production build locally:
-
-```bash
-npm run preview
-# or
-yarn preview
-```
-
-This will serve the production build at `http://localhost:4173` by default.
-
 ## Conclusion
 
-You should now have a fully functional development environment for the Collab Workspace App. If you have any questions or need further assistance, please refer to the project documentation or contact the development team.
+You should now have a fully functional development environment for the Collab Workspace App. If you have any questions or need further assistance, please refer to the project documentation.
