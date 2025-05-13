@@ -17,6 +17,7 @@ export type Task = {
   status: "To Do" | "In Progress" | "Done";
   assignedTo: string;
   dueDate?: string;
+  boardId: string;
 };
 
 type NewTask = Omit<Task, "id">;

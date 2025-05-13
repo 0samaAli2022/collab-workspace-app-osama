@@ -44,7 +44,7 @@ const TaskModal = ({ isOpen, onClose, editTask }: Props) => {
         e.preventDefault();
         if (!user || !boardId) return;
 
-        const taskData = { title, description, status, assignedTo, dueDate };
+        const taskData = { title, description, status, assignedTo, dueDate, boardId };
 
         try {
             if (editTask) {

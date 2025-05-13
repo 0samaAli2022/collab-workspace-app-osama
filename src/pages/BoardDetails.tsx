@@ -19,7 +19,7 @@ export default function BoardDetailsPage() {
     if (boardId) {
       fetchTasks(boardId);
     }
-  }, [boardId, fetchTasks]);
+  }, [boardId]);
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;

@@ -38,7 +38,6 @@ export default function TaskCard({ task, onClick }: TaskCardProps) {
         ) : (
           <span className="italic text-xs">Unassigned</span>
         )}
-
         {task.dueDate && (
           <span className="text-xs">
             {format(new Date(task.dueDate), "MMM d")}
